@@ -1,14 +1,18 @@
 module HasVimeoVideo
   class VimeoVideo
-    
-    def self.regex
-      /https?:\/\/(www\.)?vimeo.com\/(\d+)/
+
+    def self.youtube_regex
+      /^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/
     end
-    
+
+    def self.regex
+      /https?:\/\/(www\.)?vimeo.com\/(\d+)|^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/
+    end
+
     def initialize url
       @url = url
     end
-    
+
     def id
       return @id if @id
       return unless @url
@@ -16,7 +20,7 @@ module HasVimeoVideo
         @id = result[2]
       end
     end
-    
+
     def info
       return @info if @info
       return unless id
@@ -29,14 +33,18 @@ module HasVimeoVideo
     rescue
       @info = nil
     end
-    
+
     def embed_url
       "//player.vimeo.com/video/#{id}"
     end
-    
+
     def thumbnail
       return unless info
       info["thumbnail_large"]
+    end
+
+    def youtube_video?
+      @url.match(VimeoVideo.youtube_regex)
     end
 
   end
