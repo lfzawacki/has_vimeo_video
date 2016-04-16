@@ -2,11 +2,11 @@ module HasVimeoVideo
   class VimeoVideo
 
     def self.youtube_regex
-      /^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/
+      /(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+/
     end
 
     def self.regex
-      /https?:\/\/(www\.)?vimeo.com\/(\d+)|^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/
+      /\s*https?:\/\/(www\.)?vimeo.com\/(\d+)|(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+/
     end
 
     def initialize url
